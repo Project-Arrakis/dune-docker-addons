@@ -19,7 +19,7 @@ jobs:
     name: Validate JSON
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Validate index.json
         run: |
           python3 -c "import json; json.load(open('index.json'))" || { echo "Invalid JSON"; exit 1; }
@@ -31,7 +31,7 @@ jobs:
     name: Security
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           fetch-depth: 0
       # gitleaks/gitleaks-action@v2 runs on the Node 20 runtime, which
@@ -41,7 +41,7 @@ jobs:
       # output/behavior changes -- see gitleaks/gitleaks-action's own
       # README migration note.
       - name: Run gitleaks
-        uses: gitleaks/gitleaks-action@v3
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # returntocorp/semgrep-action (and its semgrep/semgrep-action
@@ -49,9 +49,12 @@ jobs:
       # READMEs ("stop using this wrapper script... migrate to native
       # Semgrep support instead"). Running the semgrep CLI directly via
       # its official Docker image is the current recommended approach.
+      # Image pinned by digest (not :latest) so a compromised or broken
+      # upstream tag can't silently change what this job pulls.
       - name: Run semgrep
         run: |
-          docker run --rm -v "${{ github.workspace }}:/src" semgrep/semgrep \
+          docker run --rm -v "${{ github.workspace }}:/src" \
+            semgrep/semgrep@sha256:67319956da3dcb58baf5b322899c15458e3963e7018a86aeeb5cd224e69cb77a \
             semgrep --config p/security-audit --error /src
 
   ci-gate:
