@@ -23,6 +23,10 @@ jobs:
       # correct cross-repo link into any of them for an anonymous request,
       # so exclude the pattern rather than eat permanent false positives.
       exclude: 'github\.com/Project-Arrakis/(mentat|mentat-link|meta)(/|$)'
+      # This repo's docs/README only reference URLs inside code-fenced
+      # JSON/bash examples, which lychee correctly never checks -- zero
+      # real links is the true, expected state here, not a misconfig.
+      fail-if-empty: false
 
   docs-review:
     if: github.event_name == 'pull_request'
