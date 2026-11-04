@@ -63,6 +63,7 @@ def safe_path(value):
 
 
 def download(url):
+    # nosemgrep: python.lang.security.audit.dynamic-urllib-use-detected.dynamic-urllib-use-detected -- url is checked by https_url() before this call and the final redirect is re-checked below
     with urlopen(Request(url, headers={'User-Agent': 'DuneDocker-Catalog-Validation'}), timeout=30) as response:
         require(urlparse(response.url).scheme == 'https', 'archive redirect must use HTTPS')
         require(int(response.headers.get('Content-Length', 0)) <= MAX_ARCHIVE, 'archive exceeds 50 MiB')

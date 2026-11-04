@@ -300,6 +300,6 @@ regular expression finds one; its separate
 is absent. Preserve that distinction if adapting those scripts.
 
 These caveats are tracked in the reference repository as issues
-[#158](https://github.com/yacketrj/dune-ops-observability-addon/issues/158)
+[#158](https://github.com/Project-Arrakis/dune-ops-observability-addon/issues/158)
 and
-[#159](https://github.com/yacketrj/dune-ops-observability-addon/issues/159).
+[#159](https://github.com/Project-Arrakis/dune-ops-observability-addon/issues/159).
