@@ -16,6 +16,14 @@ Build and release your addon from your own repository. To list it here, add a ma
 
 See `docs/addon-submission.md` and `docs/addon-manifest.md` for the expected format.
 
+Validate changes with `python3 scripts/validate.py`. Add `--verify-packages` to
+check the pinned release ZIPs and their checksums without installing anything.
+GitHub Actions runs metadata, regression and package checks for contributions.
+
+See `docs/addon-upstream-pr-workflow.md` for a reusable CI, security,
+release, checksum-verification, and catalog-PR workflow, including
+caveats from an existing addon's automation.
+
 ## Addon Lifecycle
 
 The community index can mark addons as `active`, `deprecated`, `unsupported`, `removed`, or `blocked`.
